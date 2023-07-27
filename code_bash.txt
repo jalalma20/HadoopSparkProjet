@@ -1,0 +1,163 @@
+1/ verify_input.sh :
+
+#!/bin/bash
+
+input_dir="C:/Users/Jalal/Desktop/Dataset/zip_dataset"
+
+if [ -z "$(ls -A $input_dir)" ]; then
+    echo "Le dépôt input est vide."
+else
+    echo "Le dépôt input n'est pas vide."
+fi
+
++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++
+
+2/ copie_data_input.sh :
+
+#!/bin/bash
+
+input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash"
+data_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash"
+
+cp $data_dir/* $input_dir
+echo "Les fichiers data ont été copiés dans le dépôt input."
+
++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++
+
+3/ copie_data_tmp.sh :
+
+#!/bin/bash
+
+input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\input_dir"
+tmp_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\data_tmp"
+
+mkdir -p $tmp_dir
+cp $input_dir/* $tmp_dir
+echo "Les fichiers présents dans le dépôt input ont été copiés dans le dossier data_tmp."
+
++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++
+
+4/delete_tmp.sh :
+
+#!/bin/bash
+
+tmp_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\data_tmp"
+
+if [ -d $tmp_dir ]; then
+    rm -r $tmp_dir
+    echo "Le dossier data_tmp et son contenu ont été supprimés."
+else
+    echo "Le dossier data_tmp n'existe pas."
+fi
++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++
+
+5/ delete_content_input.sh :
+
+#!/bin/bash
+
+input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\input_dir"
+
+if [ -z "$(ls -A $input_dir)" ]; then
+    echo "Le dépôt input est déjà vide."
+else
+    rm $input_dir/*
+    echo "Le contenu du dépôt input a été supprimé."
+fi
+
++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++
+
+6/run_spark.sh :
+
+
+#!/bin/bash
+
+# Assurez-vous d'ajuster les paramètres de lancement de Spark selon vos besoins
+spark-submit --class VotreClassePrincipale --master yarn --deploy-mode cluster votre_fichier_spark.jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+#!/bin/bash
+
+# Fonction pour vérifier si le dépôt input est vide ou pas
+function verification_input() {
+    input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\input_dir"
+
+    if [ -z "$(ls -A $input_dir)" ]; then
+        echo "Le dépôt input est vide."
+    else
+        echo "Le dépôt input n'est pas vide."
+    fi
+}
+
+# Fonction pour copier les fichiers data dans le dépôt input
+function copie_dans_input() {
+    input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\input_dir"
+    data_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash"
+
+    cp $data_dir/* $input_dir
+    echo "Les fichiers data ont été copiés dans le dépôt input."
+}
+
+# Fonction pour créer un dossier data_tmp et copier les fichiers présents dans le dépôt input
+function copie_dans_tmp() {
+    input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\input_dir"
+    tmp_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\tmp_dir"
+
+    mkdir -p $tmp_dir
+    cp $input_dir/* $tmp_dir
+    echo "Les fichiers présents dans le dépôt input ont été copiés dans le dossier data_tmp."
+}
+
+# Fonction pour lancer l'application Spark
+function run_spark() {
+    # Assurez-vous d'ajuster les paramètres de lancement de Spark selon vos besoins
+    spark-submit --class VotreClassePrincipale --master yarn --deploy-mode cluster votre_fichier_spark.jar
+}
+
+# Fonction pour supprimer le dossier data_tmp et son contenu
+function suppression_dossier_temporaire() {
+    tmp_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\tmp_dir"
+
+    if [ -d $tmp_dir ]; then
+        rm -r $tmp_dir
+        echo "Le dossier data_tmp et son contenu ont été supprimés."
+    else
+        echo "Le dossier data_tmp n'existe pas."
+    fi
+}
+
+# Fonction pour supprimer le contenu du dépôt input
+function suppression_contenu_input() {
+    input_dir="C:\Users\Jalal\Desktop\Maven\fichiers_bash\input_dir"
+
+    if [ -z "$(ls -A $input_dir)" ]; then
+        echo "Le dépôt input est déjà vide."
+    else
+        rm $input_dir/*
+        echo "Le contenu du dépôt input a été supprimé."
+    fi
+}
+
+# Appel des fonctions dans l'ordre demandé
+verification_input
+copie_dans_input
+copie_dans_tmp
+run_spark
+suppression_dossier_temporaire
+suppression_contenu_input
+
